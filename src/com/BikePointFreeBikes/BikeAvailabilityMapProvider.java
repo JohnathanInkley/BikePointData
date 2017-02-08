@@ -25,7 +25,6 @@ public class BikeAvailabilityMapProvider {
         latestBikeAvailabilityMap = new ConcurrentHashMap<>(dataProvider.requestNewBikeAvailabilityMap());
         service = Executors.newFixedThreadPool(1);
         service.execute(this::continuouslyUpdateBikeAvailabilityMap);
-        return;
     }
 
     private void continuouslyUpdateBikeAvailabilityMap() {
@@ -46,7 +45,6 @@ public class BikeAvailabilityMapProvider {
         while (latestBikeAvailabilityMapDummy == null) {
             //
         }
-        return;
     }
 
     private void continuouslyUpdateDummyBikeAvailabilityMap() {
