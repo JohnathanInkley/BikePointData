@@ -17,4 +17,16 @@ public class BikeAvailabilityMapProviderTest {
         HashMap<String, BikeStopEntry> providedMap = provider.getLatestBikeAvailabilityMapDummy();
         assertEquals(testMap, providedMap);
     }
+
+    @Test
+    public void objectShouldReturnAMapOFLocationsAndFreeBikesNonDummy() {
+        BikeStopEntry clerkenwellTestEntry = new BikeStopEntry(0, 51.529163, -0.10997);
+        BikeAvailabilityMapProvider provider = new BikeAvailabilityMapProvider();
+        provider.start();
+        HashMap<String, BikeStopEntry> providedMap = provider.getLatestBikeAvailabilityMap();
+        BikeStopEntry clerkenwellRealEntry = providedMap.get("River Street , Clerkenwell");
+        assertEquals(clerkenwellTestEntry.getLatitude(), clerkenwellRealEntry.getLatitude());
+        assertEquals(clerkenwellTestEntry.getLongitude(), clerkenwellRealEntry.getLongitude());
+    }
+
 }
