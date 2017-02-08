@@ -1,6 +1,8 @@
-+Make program handle web data reader exceptions properly
+Make program handle web data reader exceptions properly
 Test web data reader better
-Maker WebDataReader not close every time it is used - perhaps it permanently produces the data
-Create class responsible for constantly updating the current bike data and providing a way for taking a copy
+Make WebDataReader not close every time it is used - perhaps it permanently produces the data
+/Create class responsible for constantly updating the current bike data and providing a way for taking a copy
 Create dispatcher that launches a new query and gets data from the bikeDataDispenser
 Make tool to filter bike data by location - maybe user can type location and we have data base of locations and lat/long pairs
+
+
