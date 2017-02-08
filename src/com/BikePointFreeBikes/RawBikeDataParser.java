@@ -12,14 +12,14 @@ import java.util.stream.Stream;
 import static java.util.Arrays.asList;
 
 public class RawBikeDataParser {
-    private String rawDataAsString;
-    private String addressOfBikeData;
-    private ArrayList<String> arrayOfUnprocessedDataItems;
-    private HashMap<String, BikeStopEntry> bikeStopNameToFreeBikeAndLocationData;
+    private String allBikePointDataAsString;
+    private String webAddressOfBikeData;
+    private ArrayList<String> rawDataForEachBikeStop;
+    private HashMap<String, BikeStopEntry> bikeAvailabilityAndLocationMap;
 
     public static void main(String[] args) {
         RawBikeDataParser parser = new RawBikeDataParser();
-        HashMap<String, BikeStopEntry> outputMap = parser.requestNewBikeStopData();
+        HashMap<String, BikeStopEntry> outputMap = parser.requestNewBikeAvailabilityMap();
 
         Properties properties = new Properties();
 
@@ -35,19 +35,19 @@ public class RawBikeDataParser {
     }
 
     public RawBikeDataParser() {
-        addressOfBikeData = "https://api.tfl.gov.uk/bikepoint";
+        webAddressOfBikeData = "https://api.tfl.gov.uk/bikepoint";
     }
 
 
-    public HashMap<String,BikeStopEntry> requestNewBikeStopData() {
+    public HashMap<String,BikeStopEntry> requestNewBikeAvailabilityMap() {
         retrieveRawDataFromTfL();
-        splitRawDataAtBikeStopNames(rawDataAsString, "commonName");
+        splitRawDataAtBikeStopNames(allBikePointDataAsString, "commonName");
         createFreeBikeAndLocationMap();
-        return bikeStopNameToFreeBikeAndLocationData;
+        return bikeAvailabilityAndLocationMap;
     }
 
     private void retrieveRawDataFromTfL() {
-        rawDataAsString = WebDataReader.readTextFromURL(addressOfBikeData);
+        allBikePointDataAsString = WebDataReader.readTextFromURL(webAddressOfBikeData);
     }
 
 
@@ -57,19 +57,19 @@ public class RawBikeDataParser {
         arrayOfUnprocessedDataItems.removeIf((s) ->
             !s.substring(0, 3).equals("\":\"")
         );
-        this.arrayOfUnprocessedDataItems = arrayOfUnprocessedDataItems;
+        this.rawDataForEachBikeStop = arrayOfUnprocessedDataItems;
         return arrayOfUnprocessedDataItems;
     }
 
     private HashMap<String,BikeStopEntry> createFreeBikeAndLocationMap() {
-        bikeStopNameToFreeBikeAndLocationData = new HashMap<>();
-        Stream<String> bikeStopDataStream = arrayOfUnprocessedDataItems.stream();
+        bikeAvailabilityAndLocationMap = new HashMap<>();
+        Stream<String> bikeStopDataStream = rawDataForEachBikeStop.stream();
         bikeStopDataStream.forEach((rawStringEntry) -> {
             String bikeStopName = getBikeStopNameFromRawData(rawStringEntry);
             BikeStopEntry newEntry = createBikeStopMapEntryFromRawData(rawStringEntry);
-            bikeStopNameToFreeBikeAndLocationData.put(bikeStopName, newEntry);
+            bikeAvailabilityAndLocationMap.put(bikeStopName, newEntry);
         });
-        return bikeStopNameToFreeBikeAndLocationData;
+        return bikeAvailabilityAndLocationMap;
     }
 
     private String getBikeStopNameFromRawData(String rawStringEntry) {
@@ -109,8 +109,8 @@ public class RawBikeDataParser {
         return Integer.valueOf(splitString[freeBikeIndex]);
     }
 
-    public String getRawDataAsString() {
+    public String getAllBikePointDataAsString() {
         retrieveRawDataFromTfL();
-        return rawDataAsString;
+        return allBikePointDataAsString;
     }
 }

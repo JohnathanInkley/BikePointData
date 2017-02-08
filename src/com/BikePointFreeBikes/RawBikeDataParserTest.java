@@ -13,13 +13,13 @@ class RawBikeDataParserTest {
     @Test
     public void parserShouldReadWebsiteText() {
         RawBikeDataParser parser = new RawBikeDataParser();
-        assertEquals("[{\"$type", parser.getRawDataAsString().substring(0,8), "Starting text should match");
+        assertEquals("[{\"$type", parser.getAllBikePointDataAsString().substring(0,8), "Starting text should match");
     }
 
     @Test
     public void stringShouldBeSplittableAtCommonName() {
         RawBikeDataParser parser = new RawBikeDataParser();
-        String rawData = parser.getRawDataAsString();
+        String rawData = parser.getAllBikePointDataAsString();
         ArrayList<String> splitData = parser.splitRawDataAtBikeStopNames(rawData, "commonName");
         assertTrue(splitData.size() > 0);
         for (String each : splitData) {
@@ -44,7 +44,7 @@ class RawBikeDataParserTest {
         String bikeStop = "River Street , Clerkenwell";
         double latitude = 51.529163;
         double longitude = -0.10997;
-        HashMap<String, BikeStopEntry> freeSpaceAndLocationMap = parser.requestNewBikeStopData();
+        HashMap<String, BikeStopEntry> freeSpaceAndLocationMap = parser.requestNewBikeAvailabilityMap();
         BikeStopEntry bikeStopData = freeSpaceAndLocationMap.get(bikeStop);
         assertEquals(latitude, bikeStopData.getLatitude());
         assertEquals(longitude, bikeStopData.getLongitude());
