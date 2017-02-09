@@ -84,7 +84,7 @@ public class RawBikeDataParser {
         double longitude = getLongitudeFromSplitString(splitEntry);
         BikeStopEntry entry = BikeStopEntry.getDefaultEmptyEntry();
         try {
-            entry =  new BikeStopEntry(numberOfFreeBikes, latitude, longitude);
+            entry =  new BikeStopEntry(numberOfFreeBikes, new UserLocation("", latitude, longitude));
         } catch (RuntimeException ex) {
         }
         return entry;

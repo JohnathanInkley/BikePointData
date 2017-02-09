@@ -11,7 +11,7 @@ public class BikeAvailabilityMapProviderTest {
     @Test
     public void objectShouldReturnAMapOFLocationsAndFreeBikes() {
         HashMap<String, BikeStopEntry> testMap = new HashMap<>(1);
-        testMap.put("bikeStop", new BikeStopEntry(1,2,3));
+        testMap.put("bikeStop", new BikeStopEntry(1, new UserLocation("",2,3)));
         BikeAvailabilityMapProvider provider = new BikeAvailabilityMapProvider();
         provider.startDummy();
         HashMap<String, BikeStopEntry> providedMap = provider.getLatestBikeAvailabilityMapDummy();
@@ -20,7 +20,7 @@ public class BikeAvailabilityMapProviderTest {
 
     @Test
     public void objectShouldReturnAMapOFLocationsAndFreeBikesNonDummy() {
-        BikeStopEntry clerkenwellTestEntry = new BikeStopEntry(0, 51.529163, -0.10997);
+        BikeStopEntry clerkenwellTestEntry = new BikeStopEntry(0, new UserLocation("", 51.529163, -0.10997));
         BikeAvailabilityMapProvider provider = new BikeAvailabilityMapProvider();
         provider.start();
         HashMap<String, BikeStopEntry> providedMap = provider.getLatestBikeAvailabilityMap();
