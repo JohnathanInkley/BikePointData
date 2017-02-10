@@ -17,8 +17,8 @@ they can see which is more likely to have free spaces in say 30 mins time
 /A map of stops to locations - and a way to read them in from file
 /Take a users latitude/longitude as current location
 /Give bike stop entry a location rather than two int fields
+A predicate to calculate min lat/long for a given distance r from a (lat,long) pair
 A method to search over map of locations and return keys by filtering on the function above
-A method to calculate min lat/long for a given distance r from a (lat,long) pair
 Some other class than can the get these keys, and produce a map of stops and free bikes, ranked by distance or by number of free bikes
 Maybe a simple predict feature that looks at last X bike maps, and calculates a crude derivate to guess next bike map?
 

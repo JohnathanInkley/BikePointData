@@ -4,8 +4,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BikeStopsInRadiusCalculatorTest {
 
@@ -34,5 +35,21 @@ public class BikeStopsInRadiusCalculatorTest {
         newCalculator.setCurrentLocation(location);
         UserLocation calculatorLocation = newCalculator.getCurrentLocation();
         assertEquals(location, calculatorLocation);
+    }
+
+    @Test
+    public void calculatorShouldHavePredicateToSayWhetherDistanceLessThanSpecified() {
+        UserLocation centre = new UserLocation("Clerkenwell", 51.529163, -0.10997);
+
+        BikeStopsInRadiusCalculator calculator = new BikeStopsInRadiusCalculator();
+        calculator.openConnectionToMapProvider(newProvider);
+        calculator.setCurrentLocation(centre);
+
+        HashMap<String, BikeStopEntry> calculatedCloseBikeStops = calculator.getBikeStopEntriesWithinDistance(0.15);
+        HashSet<String> bikeStopsCloseFromMap = new HashSet<>();
+        bikeStopsCloseFromMap.add("River Street , Clerkenwell");
+        bikeStopsCloseFromMap.add("Hardwick Street, Clerkenwell");
+
+        assertEquals(bikeStopsCloseFromMap, calculatedCloseBikeStops.keySet());
     }
 }

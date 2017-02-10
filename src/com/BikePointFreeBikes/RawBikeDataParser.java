@@ -66,7 +66,7 @@ public class RawBikeDataParser {
         Stream<String> bikeStopDataStream = rawDataForEachBikeStop.stream();
         bikeStopDataStream.forEach((rawStringEntry) -> {
             String bikeStopName = getBikeStopNameFromRawData(rawStringEntry);
-            BikeStopEntry newEntry = createBikeStopMapEntryFromRawData(rawStringEntry);
+            BikeStopEntry newEntry = createBikeStopMapEntryFromRawData(rawStringEntry, bikeStopName);
             bikeAvailabilityAndLocationMap.put(bikeStopName, newEntry);
         });
         return bikeAvailabilityAndLocationMap;
@@ -77,14 +77,14 @@ public class RawBikeDataParser {
         return splitEntry[2];
     }
 
-    private BikeStopEntry createBikeStopMapEntryFromRawData(String rawStringEntry) {
+    private BikeStopEntry createBikeStopMapEntryFromRawData(String rawStringEntry, String bikeStopName) {
         String[] splitEntry = rawStringEntry.split("\"");
         int numberOfFreeBikes = getFreeBikesFromSplitString(splitEntry);
         double latitude = getLatitudeFromSplitString(splitEntry);
         double longitude = getLongitudeFromSplitString(splitEntry);
         BikeStopEntry entry = BikeStopEntry.getDefaultEmptyEntry();
         try {
-            entry =  new BikeStopEntry(numberOfFreeBikes, new UserLocation("", latitude, longitude));
+            entry =  new BikeStopEntry(numberOfFreeBikes, new UserLocation(bikeStopName, latitude, longitude));
         } catch (RuntimeException ex) {
         }
         return entry;

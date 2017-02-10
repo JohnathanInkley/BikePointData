@@ -42,5 +42,7 @@ public class BikeStopEntry {
         return location.getLongitude();
     }
 
-
+    public UserLocation getLocation() {
+        return location;
+    }
 }

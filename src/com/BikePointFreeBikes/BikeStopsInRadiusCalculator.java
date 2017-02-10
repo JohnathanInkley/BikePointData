@@ -36,4 +36,14 @@ public class BikeStopsInRadiusCalculator {
     public UserLocation getCurrentLocation() {
         return currentLocation;
     }
+
+    public HashMap<String,BikeStopEntry> getBikeStopEntriesWithinDistance(double radius) {
+        HashMap<String, BikeStopEntry> bikeStopsWithinDistance = new HashMap<>();
+        currentBikeStopMap.forEach((stopName, stopEntry) -> {
+            if (currentLocation.distanceTo(stopEntry.getLocation()) <= radius) {
+                bikeStopsWithinDistance.put(stopName, stopEntry);
+            }
+        });
+        return bikeStopsWithinDistance;
+    }
 }
