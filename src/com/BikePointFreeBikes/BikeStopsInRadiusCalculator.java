@@ -20,16 +20,12 @@ public class BikeStopsInRadiusCalculator {
         currentBikeStopMap = mapProvider.getLatestBikeAvailabilityMap();
     }
 
-    public HashMap<String, BikeStopEntry> getCurrentBikeStopMap() {
-        return currentBikeStopMap;
+    public void setCurrentLocation(String location) {
+        currentLocation = AddressStringToUserLocationConverter.getUserLocationFromString(location);
     }
 
     public void setCurrentLocation(UserLocation currentLocation) {
         this.currentLocation = currentLocation;
-    }
-
-    public UserLocation getCurrentLocation() {
-        return currentLocation;
     }
 
     public HashMap<String,BikeStopEntry> getBikeStopEntriesWithinDistance(double radius) {
@@ -42,7 +38,11 @@ public class BikeStopsInRadiusCalculator {
         return bikeStopsWithinDistance;
     }
 
-    public void setCurrentLocation(String location) {
-        currentLocation = AddressStringToUserLocationConverter.getUserLocationFromString(location);
+    public HashMap<String, BikeStopEntry> getCurrentBikeStopMap() {
+        return currentBikeStopMap;
+    }
+
+    public UserLocation getCurrentLocation() {
+        return currentLocation;
     }
 }

@@ -17,7 +17,7 @@ public class BikeStopsInRadiusCalculatorTest {
     public static void setUpProvider() {
         newProvider = new BikeAvailabilityMapProvider();
         newProvider.start();
-        calculator = newProvider.returnNewCalculator();
+        calculator = newProvider.getNewRadiusCalculator();
     }
 
     @Test

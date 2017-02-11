@@ -16,8 +16,9 @@ public class BikeAvailabilityMapProvider {
     public static void main(String[] args) {
         BikeAvailabilityMapProvider provider = new BikeAvailabilityMapProvider();
         provider.start();
-        HashMap<String, BikeStopEntry> bikeMap = provider.getLatestBikeAvailabilityMap();
-        System.out.println(bikeMap.get("Buckingham Gate, Westminster"));
+        BikeStopsInRadiusCalculator calculator = provider.getNewRadiusCalculator();
+        calculator.setCurrentLocation("Kempton Court, Whitechapel");
+        System.out.println(calculator.getBikeStopEntriesWithinDistance(0.1));
     }
 
     public void start() {
@@ -61,7 +62,7 @@ public class BikeAvailabilityMapProvider {
         return new HashMap<>(latestBikeAvailabilityMapDummy);
     }
 
-    public BikeStopsInRadiusCalculator returnNewCalculator() {
+    public BikeStopsInRadiusCalculator getNewRadiusCalculator() {
         BikeStopsInRadiusCalculator newCalculator = new BikeStopsInRadiusCalculator();
         newCalculator.openConnectionToMapProvider(this);
         return newCalculator;

@@ -31,7 +31,7 @@ public class BikeStopEntry {
     }
 
     public String toString() {
-        return numberOfFreeBikes + " free bike(s) at latitude " + location.getLatitude() + " and longitude " + location.getLongitude();
+        return numberOfFreeBikes + " free bike(s) ";
     }
 
     public double getLatitude() {

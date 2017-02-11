@@ -33,7 +33,7 @@ public class BikeAvailabilityMapProviderTest {
     public void providerShouldReturnCalculatorInstances() {
         BikeAvailabilityMapProvider provider = new BikeAvailabilityMapProvider();
         provider.start();
-        BikeStopsInRadiusCalculator clientCalculator = provider.returnNewCalculator();
+        BikeStopsInRadiusCalculator clientCalculator = provider.getNewRadiusCalculator();
         UserLocation testLocation = new UserLocation("", 51.529163, -0.10997);
         clientCalculator.setCurrentLocation(testLocation);
         assertEquals(clientCalculator.getCurrentLocation(), testLocation);
