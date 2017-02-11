@@ -5,18 +5,7 @@ Create dispatcher that launches a new query and gets data from the bikeDataDispe
 
 Future idea, work out expected number of bikes in a given amount of  time, so if user needs to choose between two locations
 they can see which is more likely to have free spaces in say 30 mins time
-
 Maybe a simple predict feature that looks at last X bike maps, and calculates a crude derivate to guess next bike map?
 
 ---- Immediate to dos -----
-+Make tool to filter bike data by location - maybe user can type location and we have data base of locations and lat/long pairs
-    - google maps API key AIzaSyDuzsl1bwFRRwvwUSNkkm5sAs8rb05AyEI
-    - we can get location's co-ords from google geocoding api
-    - for a given radius, we can get max and min lat/long to give an effective search area
-    - Then can loop over hash-map and effectively choose stops
 
-/Function that processes string into google's required syntax
-Function that takes string and returns it's location from google
-
-
-Should start() take the number of expected clients?
