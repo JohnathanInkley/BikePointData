@@ -50,7 +50,7 @@ public class BikeAvailabilityMapProvider {
     private void continuouslyUpdateDummyBikeAvailabilityMap() {
         ConcurrentHashMap<String, BikeStopEntry> temporaryMap;
         HashMap<String, BikeStopEntry> dummyMap = new HashMap<>(1);
-        dummyMap.put("bikeStop", new BikeStopEntry(1, new UserLocation("", 2,3)));
+        dummyMap.put("bikeStop", new BikeStopEntry(1, new UserLocation("", 2, 3)));
         while (true) {
             temporaryMap = new ConcurrentHashMap<>(dummyMap);
             latestBikeAvailabilityMapDummy = temporaryMap;
@@ -59,5 +59,11 @@ public class BikeAvailabilityMapProvider {
 
     public HashMap<String, BikeStopEntry> getLatestBikeAvailabilityMapDummy() {
         return new HashMap<>(latestBikeAvailabilityMapDummy);
+    }
+
+    public BikeStopsInRadiusCalculator returnNewCalculator() {
+        BikeStopsInRadiusCalculator newCalculator = new BikeStopsInRadiusCalculator();
+        newCalculator.openConnectionToMapProvider(this);
+        return newCalculator;
     }
 }

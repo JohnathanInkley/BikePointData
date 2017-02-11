@@ -29,4 +29,15 @@ public class BikeAvailabilityMapProviderTest {
         assertEquals(clerkenwellTestEntry.getLongitude(), clerkenwellRealEntry.getLongitude());
     }
 
+    @Test
+    public void providerShouldReturnCalculatorInstances() {
+        BikeAvailabilityMapProvider provider = new BikeAvailabilityMapProvider();
+        provider.start();
+        BikeStopsInRadiusCalculator clientCalculator = provider.returnNewCalculator();
+        UserLocation testLocation = new UserLocation("", 51.529163, -0.10997);
+        clientCalculator.setCurrentLocation(testLocation);
+        assertEquals(clientCalculator.getCurrentLocation(), testLocation);
+
+    }
+
 }
